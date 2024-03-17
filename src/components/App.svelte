@@ -1,6 +1,9 @@
 <script>
   // Write your JS here, or import other files
   import { onMount } from "svelte";
+  import { createRequire } from "module";
+
+  const require = createRequire(import.meta.url);
 
   var fs = require("fs"),
     RandomForestClassifier =
@@ -10,22 +13,23 @@
   });
 
   onMount(async () => {
-    var testdata = [{
-    "length":6.3,
-    "width":2.5,
-    "petal_length":5,
-    "petal_width":1.9,
-    //"species":"virginica"
-  }
-];
-rf.fit(data, null, "species", function (err, trees) {
-    //console.log(JSON.stringify(trees, null, 4));
-    var pred = rf.predict(testdata, trees);
+    var testdata = [
+      {
+        length: 6.3,
+        width: 2.5,
+        petal_length: 5,
+        petal_width: 1.9,
+        //"species":"virginica"
+      },
+    ];
+    rf.fit(data, null, "species", function (err, trees) {
+      //console.log(JSON.stringify(trees, null, 4));
+      var pred = rf.predict(testdata, trees);
 
-    console.log(pred);
+      console.log(pred);
 
-    // pred = ["virginica", "setosa"]
-  });
+      // pred = ["virginica", "setosa"]
+    });
   });
 </script>
 
